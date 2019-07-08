@@ -1,0 +1,34 @@
+Conceitos chave:
+- Dispatch (trigger da action)
+- Action (intenção/ordem ativada pelo dispatch para o reducer alterar o state da alicação)
+- Reducers (funções puras para alterar o state de acordo com a action)
+- State (dados da aplicação)
+- Store (caixa preta com todos os dados da aplicação)
+
+Se faz um DISPATCH de uma ACTION para o REDUCER alterar o STATE na STORE.
+
+3 princípios do Redux:
+
+- Single source of truth:
+  - No componente A o state possui 6 séries e no componente B o state possui 4 séries.
+    O correto será o state do Redux, que poderá dizer, por exemplo, 6 séries.
+
+- State is read-only:
+  - Evitar problemas de Race Condition
+  - Assíncrono -> Síncrono
+    Exemplo: temos um state valendo 1. Duas chamadas assíncronas A e B são disparadas. 
+    A retorno da chamada A é processado e sobreescreve o state com state + 1.
+    A retorno da chamada B também é processado e também sobreescreve o state com state + 1.
+    No final, como são chamadas assíncronas e que estão sobreescrevendo o state diretamente,
+    o state resultaria em 2, quando deveria resultar em 3 (+1 da chamada A e +1 da chamada B).
+    Com o Redux, os reducers (funções puras) cuidariam do mudança do state, e esse teria então
+    o valor correto, que é 3.
+
+- Changes are made with pure functions:
+  - (x, y) -> reducer -> z
+    (x, y) -> reducer -> z
+    (x, y) -> reducer -> z
+    (x, y) -> reducer -> z
+    (x, y) -> reducer -> z
+  - Mais simples de escrever testes automatizados. 
+    Exemplo: if(pureFunction(x, y) === z)
