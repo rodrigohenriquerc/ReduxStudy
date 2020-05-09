@@ -1,8 +1,10 @@
-export const Types = {
-  ADD: 'todos/ADD',
-  TOGGLE: 'todos/TOGGLE',
-  REMOVE: 'todos/REMOVE',
-};
+import { createActions, createReducers } from 'reduxsauce';
+
+export const { Types, Creators } = createActions({
+  addTodo: ['text'],
+  toggleTodo: ['id'],
+  removeTodo: ['id'],
+});
 
 const INITIAL_STATE = [];
 
@@ -25,26 +27,3 @@ export default function todos(state = INITIAL_STATE, action) {
       return state;
   }
 }
-
-export const Creators = {
-  addTodo: text => ({
-    type: Types.ADD,
-    payload: {
-      text,
-    }
-  }),
-
-  toggleTodo: id => ({
-    type: Types.TOGGLE,
-    payload: {
-      id,
-    }
-  }),
-
-  removeTodo: id => ({
-    type: Types.REMOVE,
-    payload: {
-      id,
-    }
-  })
-};
